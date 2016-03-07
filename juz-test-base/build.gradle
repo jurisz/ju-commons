@@ -1,0 +1,22 @@
+dependencies {
+	compile lib.junit
+	compile lib.hamcrest_all
+	compile lib.pdfbox
+
+	compile lib.logback
+	compile lib.guava
+	compile lib.commons_lang
+	compile lib.mockito
+	compile lib.spring_core
+	compile lib.spring_beans
+	compile lib.joda_time
+	compile lib.commons_io
+
+	compile lib.groovy
+	compile(lib.spock_core) {
+		exclude group: 'junit'
+	}
+	compile lib.spring_test
+	compile lib.spock_spring
+	compile lib.cglib
+}

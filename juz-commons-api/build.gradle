@@ -1,0 +1,12 @@
+group = "org.occ.api"
+
+dependencies {
+	compile lib.guava
+	compile lib.commons_lang
+	compile lib.joda_time
+	compile lib.jsr305
+
+	testCompile project(":juz-test-base")
+	testCompile lib.junit
+	testCompile lib.hamcrest_all
+}

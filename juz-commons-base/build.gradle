@@ -1,0 +1,41 @@
+dependencies {
+
+	//compile project(":occ-util")
+	compile project(":juz-commons-api")
+
+	compile lib.spring_context
+	compile lib.spring_tx
+	compile lib.spring_security_core
+	compile lib.spring_context_support
+	compile lib.spring_expression
+	compile lib.hibernate_core
+	compile lib.hibernate_envers
+
+	compile(lib.hibernate_ehcache) {
+		exclude group: 'net.sf.ehcache', module: '*'
+	}
+	compile lib.ehcache
+	compile lib.hikaricp
+
+	compile lib.jadira_usertype
+	compile lib.spring_orm
+	compile lib.commons_io
+
+	compile lib.camel_core
+	compile lib.camel_jms
+	compile lib.camel_quartz2
+	compile(lib.camel_spring_config) {
+		exclude group: 'org.apache.servicemix.bundles', module: '*'
+	}
+	compile lib.activemq_client
+	compile lib.activemq_broker
+	compile lib.activemq_camel
+
+	compile lib.quartz
+
+	testCompile project(":juz-test-base")
+	testCompile lib.guava_test
+	testCompile lib.h2
+	testCompile lib.spring_test
+
+}

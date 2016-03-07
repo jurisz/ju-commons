@@ -1,0 +1,94 @@
+apply plugin: 'base'
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.9'
+}
+
+buildscript {
+
+	repositories {
+		mavenLocal()
+		jcenter()
+	}
+
+	dependencies {
+		classpath 'io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE'
+	}
+}
+
+allprojects {
+
+	group = "org.juz.common"
+
+	apply from: "${rootProject.projectDir}/gradle/libraries.gradle"
+
+	apply plugin: 'java'
+	apply plugin: 'groovy'
+	apply plugin: 'maven'
+	apply plugin: 'eclipse'
+	apply plugin: 'checkstyle'
+	apply plugin: 'idea'
+	apply plugin: 'io.spring.dependency-management'
+
+	repositories {
+		mavenLocal()
+		jcenter()
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "io.spring.platform:platform-bom:$spring_platform_version"
+		}
+	}
+
+	compileJava {
+		sourceCompatibility = '1.8'
+		targetCompatibility = '1.8'
+		options.encoding = 'UTF-8'
+		options.compilerArgs = ['-XDignore.symbol.file', '-Xlint:unchecked']
+	}
+
+	compileTestJava {
+		sourceCompatibility = '1.8'
+		targetCompatibility = '1.8'
+		options.encoding = 'UTF-8'
+	}
+
+	task sourcesJar(type: Jar, dependsOn: classes) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+	artifacts {
+		archives sourcesJar
+	}
+
+	checkstyle {
+		configFile = rootProject.file('checkstyle.xml')
+		toolVersion = "6.0"
+	}
+
+	uploadArchives {
+		repositories.mavenDeployer {
+			repository(url: "file:${projectDir}/../maven-repo")
+		}
+	}
+
+	install {
+		repositories.mavenInstaller {
+			pom.project {
+				parent {
+					groupId "io.spring.platform"
+					artifactId "platform-bom"
+					version "$spring_platform_version"
+				}
+			}
+		}
+	}
+}
+
+def platformLibVersion(def versionProperty) {
+	':' + dependencyManagement.importedProperties.get(versionProperty)
+}
+
+
