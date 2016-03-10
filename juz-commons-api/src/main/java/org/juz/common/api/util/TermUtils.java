@@ -1,8 +1,9 @@
 package org.juz.common.api.util;
 
-import org.joda.time.LocalDate;
 import org.juz.common.api.Term;
 import org.juz.common.api.Term.TermUnit;
+
+import java.time.LocalDate;
 
 
 public class TermUtils {
@@ -25,10 +26,6 @@ public class TermUtils {
 			return Term.days(value);
 		}
 		return null;
-	}
-
-	public static boolean hasNoReminder(Term dividend, Term divisor) {
-		return getDaysInTerm(dividend) % getDaysInTerm(divisor) == 0;
 	}
 
 	public static Term subtract(Term term1, Term term2) {

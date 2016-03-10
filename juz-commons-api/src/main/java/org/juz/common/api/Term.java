@@ -12,14 +12,6 @@ public class Term {
 	private Integer value;
 	private TermUnit unit;
 
-	public static Term months(int months) {
-		return new Term(months, TermUnit.MONTHS);
-	}
-
-	public static Term days(int days) {
-		return new Term(days, TermUnit.DAYS);
-	}
-
 	public Term() {
 	}
 
@@ -27,6 +19,14 @@ public class Term {
 		super();
 		this.value = value;
 		this.unit = unit;
+	}
+
+	public static Term months(int months) {
+		return new Term(months, TermUnit.MONTHS);
+	}
+
+	public static Term days(int days) {
+		return new Term(days, TermUnit.DAYS);
 	}
 
 	public Integer getValue() {

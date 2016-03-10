@@ -1,7 +1,6 @@
-package org.juz.common.api;
+package org.juz.common.api.operationlog;
 
-import org.joda.time.LocalDateTime;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

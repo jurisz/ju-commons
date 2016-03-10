@@ -1,6 +1,5 @@
 dependencies {
 
-	//compile project(":occ-util")
 	compile project(":juz-commons-api")
 
 	compile lib.spring_context
@@ -10,16 +9,15 @@ dependencies {
 	compile lib.spring_expression
 	compile lib.hibernate_core
 	compile lib.hibernate_envers
+	compile lib.ehcache
 
 	compile(lib.hibernate_ehcache) {
 		exclude group: 'net.sf.ehcache', module: '*'
 	}
-	compile lib.ehcache
-	compile lib.hikaricp
 
-	compile lib.jadira_usertype
 	compile lib.spring_orm
 	compile lib.commons_io
+	compile lib.commons_codec
 
 	compile lib.camel_core
 	compile lib.camel_jms
@@ -34,8 +32,7 @@ dependencies {
 	compile lib.quartz
 
 	testCompile project(":juz-test-base")
-	testCompile lib.guava_test
+	testCompile lib.hikaricp
 	testCompile lib.h2
 	testCompile lib.spring_test
-
 }

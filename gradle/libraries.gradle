@@ -43,19 +43,7 @@ ext {
 			//  aspectj
 			aspectjweaver          : "org.aspectj:aspectjweaver",
 
-			//jersey
-			jersey_client          : "org.glassfish.jersey.core:jersey-client",
-			jersey_json            : "org.glassfish.jersey.media:jersey-media-json-jackson",
-			jersey_apache_connector: "org.glassfish.jersey.connectors:jersey-apache-connector",
-
-			//jackson
-			jackson_datatype_joda  : "com.fasterxml.jackson.datatype:jackson-datatype-joda",
-
-			//rest
-			jaxb_ws_rs             : "javax.ws.rs:javax.ws.rs-api",
-
 			//utils
-			joda_time              : "joda-time:joda-time",
 			pdfbox                 : "org.apache.pdfbox:pdfbox:1.8.2",
 			commons_lang           : "org.apache.commons:commons-lang3",
 			commons_codec          : "commons-codec:commons-codec",
@@ -74,7 +62,6 @@ ext {
 			hibernate_envers       : "org.hibernate:hibernate-envers",
 			hibernate_ehcache      : "org.hibernate:hibernate-ehcache",
 			ehcache                : "net.sf.ehcache:ehcache",
-			jadira_usertype        : "org.jadira.usertype:usertype.core:3.1.0.CR1",
 			hibernate_validator    : "org.hibernate:hibernate-validator",
 
 			h2                     : "com.h2database:h2",

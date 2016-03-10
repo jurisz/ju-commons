@@ -13,6 +13,10 @@ public class ValidationResult {
 	public ValidationResult() {
 	}
 
+	public ValidationResult(ValidationError error) {
+		this.errors.add(error);
+	}
+
 	public static ValidationResult noErrors() {
 		return new ValidationResult();
 	}
@@ -27,10 +31,6 @@ public class ValidationResult {
 		ValidationResult result = new ValidationResult();
 		result.addErrors(errors);
 		return result;
-	}
-
-	public ValidationResult(ValidationError error) {
-		this.errors.add(error);
 	}
 
 	public Set<ValidationError> getErrors() {

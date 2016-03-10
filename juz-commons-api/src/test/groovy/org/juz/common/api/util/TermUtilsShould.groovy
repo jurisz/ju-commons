@@ -1,8 +1,9 @@
 package org.juz.common.api.util
 
-import org.joda.time.LocalDate
 import org.juz.common.api.Term
 import spock.lang.Specification
+
+import java.time.LocalDate
 
 class TermUtilsShould extends Specification {
 

@@ -1,6 +1,6 @@
-package org.juz.common.api;
+package org.juz.common.api.operationlog;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class OperationLogPropertyBean {
 

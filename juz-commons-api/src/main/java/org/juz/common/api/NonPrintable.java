@@ -12,6 +12,10 @@ public class NonPrintable<T> {
 		this.value = value;
 	}
 
+	public static <T> NonPrintable<T> absent() {
+		return new NonPrintable<T>(null);
+	}
+
 	public T getValue() {
 		return value;
 	}
@@ -19,10 +23,6 @@ public class NonPrintable<T> {
 	@Override
 	public String toString() {
 		return "*********";
-	}
-
-	public static <T> NonPrintable<T> absent() {
-		return new NonPrintable<T>(null);
 	}
 
 	@Override
