@@ -59,6 +59,11 @@ public abstract class BaseEntity {
 		this.updated = updated;
 	}
 
+	@PreUpdate
+	public void preUpdate() {
+		this.updated = DateTimeUtils.now();
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T, F> T apply(Function<F, T> function) {
 		return function.apply((F) this);

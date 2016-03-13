@@ -7,8 +7,11 @@ dependencies {
 	compile lib.spring_security_core
 	compile lib.spring_context_support
 	compile lib.spring_expression
+	compile lib.spring_data_jpa
 	compile lib.hibernate_core
+	compile lib.hibernate_entity
 	compile lib.hibernate_envers
+	compile lib.jadira_usertype
 	compile lib.ehcache
 
 	compile(lib.hibernate_ehcache) {
