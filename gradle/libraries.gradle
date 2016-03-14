@@ -66,7 +66,6 @@ ext {
 			ehcache               : "net.sf.ehcache:ehcache",
 			hibernate_validator   : "org.hibernate:hibernate-validator",
 
-
 			h2                    : "com.h2database:h2",
 			hikaricp              : "com.zaxxer:HikariCP",
 			freemarker            : "org.freemarker:freemarker",

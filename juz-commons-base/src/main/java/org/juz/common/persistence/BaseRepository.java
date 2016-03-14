@@ -1,4 +1,4 @@
-package org.juz.common.persistence.jpa;
+package org.juz.common.persistence;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @NoRepositoryBean
-interface BaseRepository<T, ID extends Serializable> extends Repository<T, ID> {
+public interface BaseRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
 	void delete(T deleted);
 

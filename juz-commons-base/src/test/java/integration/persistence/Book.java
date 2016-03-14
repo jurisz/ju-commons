@@ -1,4 +1,4 @@
-package org.juz.common.persitance.model;
+package integration.persistence;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.envers.Audited;

@@ -10,10 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Collection;
@@ -25,6 +29,7 @@ import static com.google.common.collect.Sets.newHashSet;
 
 @EnableTransactionManagement
 @Configuration
+@EnableJpaRepositories
 class HibernateTestingConfig {
 
 	@Autowired
@@ -76,9 +81,6 @@ class HibernateTestingConfig {
 		properties.put("org.hibernate.envers.audit_table_prefix", "AUDIT_");
 		properties.put("org.hibernate.envers.audit_table_suffix", "");
 
-		properties.put("jadira.usertype.autoRegisterUserTypes", "true");
-		properties.put("jadira.usertype.databaseZone", "jvm");
-
 		return properties;
 	}
 
@@ -92,21 +94,10 @@ class HibernateTestingConfig {
 		return entityManagerFactoryBean;
 	}
 
-//	@Bean
-//	public SessionFactory sessionFactory(DataSource dataSource, @Qualifier("hibernateProperties") Properties properties) throws Exception {
-//
-//		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-//		sessionFactoryBean.setDataSource(dataSource);
-//		sessionFactoryBean.setPackagesToScan(packagesToScan());
-//		sessionFactoryBean.setHibernateProperties(properties);
-//		sessionFactoryBean.afterPropertiesSet();
-//		return sessionFactoryBean.getObject();
-//	}
-
-//	@Bean
-//	public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-//		return new HibernateTransactionManager(sessionFactory);
-//	}
+	@Bean
+	PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
 
 	private String[] packagesToScan() {
 		Set<String> packages = newHashSet();

@@ -1,4 +1,4 @@
-package org.juz.common.persitance.model;
+package integration.persistence;
 
 import com.google.common.collect.Lists;
 import org.hibernate.annotations.BatchSize;

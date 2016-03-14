@@ -10,6 +10,6 @@ public class ModelPersistenceScan implements ScanPersistencePackages {
 
 	@Override
 	public Collection<String> asStrings() {
-		return of("org.juz.common.persistence");
+		return of("integration.persistence");
 	}
 }

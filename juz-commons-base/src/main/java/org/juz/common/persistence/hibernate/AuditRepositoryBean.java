@@ -7,10 +7,10 @@ import org.juz.common.persistence.model.BaseEntity;
 import org.juz.common.persistence.model.audit.AuditEntryKey;
 import org.juz.common.persistence.model.audit.AuditRepository;
 import org.juz.common.persistence.model.audit.Revision;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,7 +19,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @Repository
 class AuditRepositoryBean implements AuditRepository {
 
-	@Autowired
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
