@@ -1,5 +1,5 @@
 rootProject.name = 'juz-commons'
 
-include 'juz-commons-api', 'juz-commons-base', "juz-test-base"
+include 'juz-commons-api', 'juz-commons-base', 'juz-commons-infrastructure', "juz-test-base"
 
 

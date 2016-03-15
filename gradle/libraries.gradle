@@ -50,6 +50,7 @@ ext {
 			commons_codec         : "commons-codec:commons-codec",
 			commons_io            : "commons-io:commons-io",
 			commons_net           : "commons-net:commons-net",
+			httpclient            : "org.apache.httpcomponents:httpclient",
 			jsr305                : "com.google.code.findbugs:jsr305",
 			javax_mail            : "com.sun.mail:javax.mail",
 			apache_poi            : "org.apache.poi:poi-ooxml",

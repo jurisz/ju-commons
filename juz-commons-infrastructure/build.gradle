@@ -1,0 +1,16 @@
+dependencies {
+
+	compile project(":juz-commons-base")
+
+	compile lib.commons_net
+	compile lib.commons_io
+	compile lib.slf4j_api
+	compile lib.javax_mail
+	compile lib.spring_web
+	compile lib.httpclient
+
+	compile lib.camel_quartz2
+
+	testCompile project(":juz-test-base")
+
+}
