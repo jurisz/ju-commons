@@ -22,10 +22,6 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Collection;
 import java.util.Properties;
-import java.util.Set;
-
-import static com.google.common.collect.Iterables.toArray;
-import static com.google.common.collect.Sets.newHashSet;
 
 @EnableTransactionManagement
 @Configuration
@@ -100,10 +96,9 @@ class HibernateTestingConfig {
 	}
 
 	private String[] packagesToScan() {
-		Set<String> packages = newHashSet();
-		for (ScanPersistencePackages scanPackage : scanPackages) {
-			packages.addAll(scanPackage.asStrings());
-		}
-		return toArray(packages, String.class);
+		return scanPackages.stream()
+				.map(ScanPersistencePackages::asStrings)
+				.flatMap(Collection::stream)
+				.toArray(String[]::new);
 	}
 }

@@ -8,6 +8,7 @@ dependencies {
 	compile lib.javax_mail
 	compile lib.spring_web
 	compile lib.httpclient
+	compile lib.apache_poi
 
 	compile lib.camel_quartz2
 
