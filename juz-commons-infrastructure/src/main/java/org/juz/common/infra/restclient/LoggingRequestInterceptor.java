@@ -20,7 +20,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 	private int maxEntitySize = 2048;
 
 	/**
-	 * response stream is read, use BufferingClientHttpRequestFactory
+	 * response stream will be read, use BufferingClientHttpRequestFactory
 	 */
 	public LoggingRequestInterceptor() {
 	}
@@ -56,19 +56,16 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		log.debug("< ==== response end");
 	}
 
-	private InputStream logInboundEntity(final StringBuilder b, InputStream stream, final Charset charset) throws IOException {
-		if (!stream.markSupported()) {
-			stream = new BufferedInputStream(stream);
-		}
-		stream.mark(maxEntitySize + 1);
+	private void logInboundEntity(final StringBuilder b, InputStream stream, final Charset charset) throws IOException {
+		BufferedInputStream loggingStream = new BufferedInputStream(stream);
+		loggingStream.mark(maxEntitySize + 1);
 		final byte[] entity = new byte[maxEntitySize + 1];
-		final int entitySize = stream.read(entity);
+		final int entitySize = loggingStream.read(entity);
 		b.append(new String(entity, 0, Math.min(entitySize, maxEntitySize), charset));
 		if (entitySize > maxEntitySize) {
 			b.append("...more...");
 		}
 		b.append('\n');
-		stream.reset();
-		return stream;
+		loggingStream.reset();
 	}
 }
