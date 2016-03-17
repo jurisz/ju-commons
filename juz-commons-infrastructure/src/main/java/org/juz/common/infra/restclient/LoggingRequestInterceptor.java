@@ -43,7 +43,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		log.info("> URI : " + request.getURI());
 		log.info("> Method : " + request.getMethod());
 		log.info("> Request Body : " + new String(body, Charsets.UTF_8));
-		log.info("> ==== request end ");
+		log.info("> ==== request end \n");
 	}
 
 	private void logResponse(ClientHttpResponse response) throws IOException {
@@ -53,7 +53,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		StringBuilder responseBuilder = new StringBuilder();
 		logInboundEntity(responseBuilder, response.getBody(), Charsets.UTF_8);
 		log.info("< {}", responseBuilder.toString());
-		log.debug("< ==== response end");
+		log.debug("< ==== response end\n");
 	}
 
 	private void logInboundEntity(final StringBuilder b, InputStream stream, final Charset charset) throws IOException {
@@ -61,7 +61,9 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		loggingStream.mark(maxEntitySize + 1);
 		final byte[] entity = new byte[maxEntitySize + 1];
 		final int entitySize = loggingStream.read(entity);
-		b.append(new String(entity, 0, Math.min(entitySize, maxEntitySize), charset));
+		if (entitySize > 0) {
+			b.append(new String(entity, 0, Math.min(entitySize, maxEntitySize), charset));
+		}
 		if (entitySize > maxEntitySize) {
 			b.append("...more...");
 		}

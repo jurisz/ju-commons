@@ -56,13 +56,14 @@ public class RestTemplateFactoryBean extends AbstractFactoryBean<RestTemplate> {
 
 	private CloseableHttpClient createHttpClient() {
 		return ExceptionUtils.propagateCatchableException(() -> {
-			CloseableHttpClient httpClient = new ApacheHttpClientFactoryBean()
+			ApacheHttpClientFactoryBean httpClientFactory = new ApacheHttpClientFactoryBean()
 					.withMaxHttpConnections(maxHttpConnections)
 					.withConnectionTimeout(connectionTimeout)
 					.withConnectionTTLSeconds(connectionTTLSeconds)
 					.withIgnoreCertificateErrors(ignoreCertificateErrors)
-					.withSocketTimeout(socketTimeout).getObject();
-			return httpClient;
+					.withSocketTimeout(socketTimeout);
+			httpClientFactory.afterPropertiesSet();
+			return httpClientFactory.getObject();
 		});
 	}
 
