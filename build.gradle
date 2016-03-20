@@ -29,6 +29,7 @@ allprojects {
 	apply plugin: 'checkstyle'
 	apply plugin: 'idea'
 	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'maven-publish'
 
 	repositories {
 		mavenLocal()
@@ -68,12 +69,6 @@ allprojects {
 		toolVersion = "6.0"
 	}
 
-	uploadArchives {
-		repositories.mavenDeployer {
-			repository(url: "file:${projectDir}/../maven-repo")
-		}
-	}
-
 	install {
 		repositories.mavenInstaller {
 			pom.project {
@@ -85,6 +80,27 @@ allprojects {
 			}
 		}
 	}
+
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				from components.java
+
+				artifact sourcesJar {
+					classifier "sources"
+				}
+			}
+		}
+	}
+
+	publishing {
+		repositories {
+			maven {
+				url "$rootProject.projectDir/../mvn-repo/releases"
+			}
+		}
+	}
+
 }
 
 def platformLibVersion(def versionProperty) {
