@@ -34,6 +34,9 @@ dependencies {
 
 	compile lib.quartz
 
+	compile lib.hibernate_validator
+	compile lib.embed_el
+
 	testCompile project(":juz-test-base")
 	testCompile lib.hikaricp
 	testCompile lib.h2

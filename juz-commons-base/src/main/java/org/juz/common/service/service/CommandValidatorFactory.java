@@ -1,6 +1,5 @@
 package org.juz.common.service.service;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -19,6 +18,8 @@ public class CommandValidatorFactory implements InitializingBean {
 
 	private Multimap<Class<?>, CommandValidator<?>> commandValidators = ArrayListMultimap.create();
 
+	private CommandConstraintsValidator commandConstraintsValidator = new CommandConstraintsValidator();
+	
 	@Autowired(required = false)
 	private List<CommandValidator> foundValidators = Lists.newArrayList();
 
@@ -26,6 +27,9 @@ public class CommandValidatorFactory implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		for (CommandValidator<?> validator : foundValidators) {
 			Class<?> commandClazz = extractCommandClazz(validator);
+			if (commandValidators.isEmpty()) {
+				commandValidators.put(commandClazz, commandConstraintsValidator);
+			}
 			commandValidators.put(commandClazz, validator);
 		}
 	}
@@ -37,11 +41,9 @@ public class CommandValidatorFactory implements InitializingBean {
 	@SuppressWarnings("unchecked")
 	public <C extends Command> List<CommandValidator<C>> getValidators(C command) {
 		Collection validators = commandValidators.get(command.getClass());
+		if (validators.isEmpty()) {
+			validators.add(commandConstraintsValidator);
+		}
 		return (List<CommandValidator<C>>) validators;
-	}
-
-	@VisibleForTesting
-	void setFoundValidators(List<CommandValidator> foundValidators) {
-		this.foundValidators = foundValidators;
 	}
 }
