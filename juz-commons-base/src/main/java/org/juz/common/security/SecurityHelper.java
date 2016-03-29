@@ -12,13 +12,13 @@ public class SecurityHelper {
 	private static final String UNKNOWN_USER = "unknown";
 
 	public static boolean setUser(String user) {
-		Preconditions.checkArgument(isNotBlank(user), "Can't be empty. Please use removeUser() to clean up security context holder.");
+		Preconditions.checkArgument(isNotBlank(user), "User required");
 		if (SecurityContextHolder.getContext().getAuthentication() == null) {
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, user);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			return true;
 		} else {
-			return false;
+			throw new IllegalStateException("User already authenticated, remove user first");
 		}
 	}
 
