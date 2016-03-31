@@ -8,7 +8,11 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestTemplateFactoryBean extends AbstractFactoryBean<RestTemplate> {
 
@@ -27,6 +31,8 @@ public class RestTemplateFactoryBean extends AbstractFactoryBean<RestTemplate> {
 	private String basicAuthUsername;
 
 	private String basicAuthPassword;
+
+	private final List<HttpMessageConverter<?>> priorityMessageConverters = new ArrayList<>();
 
 	@Override
 	public Class<?> getObjectType() {
@@ -50,6 +56,8 @@ public class RestTemplateFactoryBean extends AbstractFactoryBean<RestTemplate> {
 		if (StringUtils.isNotEmpty(basicAuthUsername)) {
 			restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(basicAuthUsername, basicAuthPassword));
 		}
+
+		priorityMessageConverters.forEach(converter -> restTemplate.getMessageConverters().add(0, converter));
 
 		return restTemplate;
 	}
@@ -104,6 +112,11 @@ public class RestTemplateFactoryBean extends AbstractFactoryBean<RestTemplate> {
 
 	public RestTemplateFactoryBean withBasicAuthPassword(String basicAuthPassword) {
 		this.basicAuthPassword = basicAuthPassword;
+		return this;
+	}
+
+	public RestTemplateFactoryBean withMessageConverter(HttpMessageConverter<?> converter) {
+		this.priorityMessageConverters.add(converter);
 		return this;
 	}
 }
