@@ -284,5 +284,4 @@ public abstract class AbstractBatchScheduler<E extends BaseEntity> implements Jo
 		Preconditions.checkNotNull(jobDefinition, "Job definition: {} bean not registered for scheduler: {}", jobName, schedulerName);
 		this.batchJobDefinition = jobDefinition;
 	}
-
 }

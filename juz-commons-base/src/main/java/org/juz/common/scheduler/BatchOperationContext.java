@@ -1,6 +1,5 @@
 package org.juz.common.scheduler;
 
-
 import org.juz.common.persistence.model.oplog.OperationLog;
 
 import java.time.LocalDateTime;
@@ -23,5 +22,4 @@ public class BatchOperationContext {
 	public OperationLog getOperationLog() {
 		return operationLog;
 	}
-
 }
