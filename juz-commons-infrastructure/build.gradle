@@ -10,8 +10,6 @@ dependencies {
 	compile lib.httpclient
 	compile lib.apache_poi
 
-	compile lib.camel_quartz2
-
 	testCompile project(":juz-test-base")
 
 }

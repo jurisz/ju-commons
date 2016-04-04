@@ -24,15 +24,12 @@ dependencies {
 
 	compile lib.camel_core
 	compile lib.camel_jms
-	compile lib.camel_quartz2
 	compile(lib.camel_spring_config) {
 		exclude group: 'org.apache.servicemix.bundles', module: '*'
 	}
 	compile lib.activemq_client
 	compile lib.activemq_broker
 	compile lib.activemq_camel
-
-	compile lib.quartz
 
 	compile lib.hibernate_validator
 	compile lib.embed_el
