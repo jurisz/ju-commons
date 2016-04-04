@@ -2,7 +2,6 @@ package org.juz.common.scheduler;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
-import org.juz.common.api.operationlog.OperationLogCoreType;
 import org.juz.common.persistence.model.BaseEntity;
 import org.juz.common.persistence.model.oplog.OperationLog;
 import org.juz.common.persistence.model.oplog.OperationLogRepository;
@@ -43,6 +42,7 @@ public abstract class AbstractBatchScheduler<E extends BaseEntity> implements Jo
 	private static final String BATCH_SIZE_PROPERTY = "batch.size";
 	private static final int MAX_FAILURES_DEFAULT = 2000;
 	private static final int BATCH_SIZE_DEFAULT = 1000;
+	public static final String OPERATION_LOG_TYPE_SCHEDULER = "SCHEDULER";
 
 	@Autowired
 	private ReloadableProperties loansProperties;
@@ -192,7 +192,7 @@ public abstract class AbstractBatchScheduler<E extends BaseEntity> implements Jo
 
 	private void createOperationContext(LocalDateTime when) {
 		OperationLog operationLog = new OperationLog();
-		operationLog.setType(OperationLogCoreType.SCHEDULER_RUN);
+		operationLog.setType(OPERATION_LOG_TYPE_SCHEDULER);
 		operationLog.setTitle(schedulerName());
 		batchOperationContext = new BatchOperationContext(when, operationLog);
 	}

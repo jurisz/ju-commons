@@ -7,7 +7,6 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.juz.common.api.operationlog.OperationLogBean;
 import org.juz.common.api.operationlog.OperationLogShortBean;
-import org.juz.common.api.operationlog.OperationLogType;
 import org.juz.common.persistence.model.BaseEntity;
 import org.juz.common.util.HumanStringJoiner;
 import org.springframework.beans.BeanUtils;
@@ -30,9 +29,8 @@ import static org.juz.common.util.DateTimeUtils.now;
 @BatchSize(size = 10)
 public class OperationLog extends BaseEntity {
 
-	@Enumerated(EnumType.STRING)
 	@Column(name = "type", length = 50)
-	private OperationLogType type;
+	private String type;
 
 	@Column(name = "title")
 	private String title;
@@ -56,11 +54,11 @@ public class OperationLog extends BaseEntity {
 		this.title = title;
 	}
 
-	public OperationLogType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(OperationLogType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

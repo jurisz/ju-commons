@@ -6,7 +6,7 @@ public class OperationLogShortBean {
 
 	private Long id;
 
-	private OperationLogType type;
+	private String type;
 
 	private LocalDateTime startDate;
 
@@ -26,11 +26,11 @@ public class OperationLogShortBean {
 		this.id = id;
 	}
 
-	public OperationLogType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(OperationLogType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
