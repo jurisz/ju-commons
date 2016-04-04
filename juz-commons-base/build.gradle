@@ -38,4 +38,6 @@ dependencies {
 	testCompile lib.hikaricp
 	testCompile lib.h2
 	testCompile lib.spring_test
+
+	compile lib.quartz
 }

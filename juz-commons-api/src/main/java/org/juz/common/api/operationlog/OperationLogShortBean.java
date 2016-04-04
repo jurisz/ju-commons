@@ -2,7 +2,7 @@ package org.juz.common.api.operationlog;
 
 import java.time.LocalDateTime;
 
-public class OperationLogShortInfoBean {
+public class OperationLogShortBean {
 
 	private Long id;
 
