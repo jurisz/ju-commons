@@ -74,8 +74,10 @@ public abstract class AbstractBatchScheduler<E extends BaseEntity> implements Jo
 		} catch (SchedulerException ex) {
 			throw new JobExecutionException(ex);
 		}
-		if (!isEnabled() && isLogInfoEnabled()) {
-			logger().info("Scheduler: {} disabled", schedulerName());
+		if (!isEnabled()) {
+			if (isLogInfoEnabled()) {
+				logger().info("Scheduler: {} disabled", schedulerName());
+			}
 			return;
 		}
 		execute();
