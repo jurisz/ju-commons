@@ -1,13 +1,14 @@
 dependencies {
+	compile project(":juz-commons-api")
 	compile lib.junit
 	compile lib.hamcrest_all
 	compile lib.pdfbox
+	compile lib.spring_web
 
 	compile lib.logback
-	compile lib.guava
-	compile lib.commons_lang
 	compile lib.mockito
 	compile lib.commons_io
+	compile lib.gson
 
 	compile lib.groovy
 	compile(lib.spock_core) {

@@ -3,7 +3,11 @@ dependencies {
 	compile lib.commons_lang
 	compile lib.jsr305
 
-	testCompile project(":juz-test-base")
 	testCompile lib.junit
 	testCompile lib.hamcrest_all
+
+	testCompile lib.groovy
+	testCompile(lib.spock_core) {
+		exclude group: 'junit'
+	}
 }
