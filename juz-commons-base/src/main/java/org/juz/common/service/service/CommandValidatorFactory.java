@@ -19,7 +19,7 @@ public class CommandValidatorFactory implements InitializingBean {
 	private Multimap<Class<?>, CommandValidator<?>> commandValidators = ArrayListMultimap.create();
 
 	private CommandConstraintsValidator commandConstraintsValidator = new CommandConstraintsValidator();
-	
+
 	@Autowired(required = false)
 	private List<CommandValidator> foundValidators = Lists.newArrayList();
 
@@ -27,7 +27,7 @@ public class CommandValidatorFactory implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		for (CommandValidator<?> validator : foundValidators) {
 			Class<?> commandClazz = extractCommandClazz(validator);
-			if (commandValidators.isEmpty()) {
+			if (!commandValidators.containsKey(commandClazz)) {
 				commandValidators.put(commandClazz, commandConstraintsValidator);
 			}
 			commandValidators.put(commandClazz, validator);
