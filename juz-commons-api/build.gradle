@@ -2,6 +2,7 @@ dependencies {
 	compile lib.guava
 	compile lib.commons_lang
 	compile lib.jsr305
+	compile lib.javax_validation
 
 	testCompile lib.junit
 	testCompile lib.hamcrest_all
