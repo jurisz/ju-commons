@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SecurityHelper {
 
-	private static final String UNKNOWN_USER = "unknown";
+	public static final String UNKNOWN_USER = "unknown";
 
 	public static boolean setUser(String user) {
 		Preconditions.checkArgument(isNotBlank(user), "User required");
