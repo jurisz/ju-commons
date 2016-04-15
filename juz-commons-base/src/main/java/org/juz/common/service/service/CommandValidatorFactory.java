@@ -40,10 +40,10 @@ public class CommandValidatorFactory implements InitializingBean {
 
 	@SuppressWarnings("unchecked")
 	public <C extends Command> List<CommandValidator<C>> getValidators(C command) {
-		Collection validators = commandValidators.get(command.getClass());
-		if (validators.isEmpty()) {
-			validators.add(commandConstraintsValidator);
+		if (!commandValidators.containsKey(command.getClass())) {
+			commandValidators.put(command.getClass(), commandConstraintsValidator);
 		}
+		Collection validators = commandValidators.get(command.getClass());
 		return (List<CommandValidator<C>>) validators;
 	}
 }
