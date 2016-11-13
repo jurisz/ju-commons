@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.juz.common.api.Command;
 import org.juz.common.api.ValidationError;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -90,14 +91,13 @@ class CommandServiceBean implements CommandService {
 	@Override
 	@Transactional
 	public <C extends Command, T> T execute(final C command) {
-		T result = null;
 		LocalDateTime start = LocalDateTime.now();
 		addAuditDetail(command);
 		boolean shouldLog = isCommandLoggable(command);
 		if (shouldLog) {
-			log.info("--> {}", toString(command));
+			log.info("--> {}", toLogString(command));
 		}
-		result = doExecute(command);
+		T result = doExecute(command);
 		entityManager.flush();
 		if (shouldLog) {
 			logResult(result, start);
@@ -119,7 +119,7 @@ class CommandServiceBean implements CommandService {
 
 	private <T> void logResult(T result, LocalDateTime start) {
 		Duration period = Duration.between(start, LocalDateTime.now());
-		log.info("<-- {} {}", toString(result), period);
+		log.info("<-- {} {}", toLogString(result), period);
 	}
 
 	private <C> void addAuditDetail(final C command) {
@@ -133,21 +133,16 @@ class CommandServiceBean implements CommandService {
 		return command.getClass().getAnnotation(DontLogCommandExecution.class) == null;
 	}
 
-	private static class CommandToStringStyle extends ToStringStyle {
-		private CommandToStringStyle() {
-			super();
-			this.setUseShortClassName(true);
-			this.setUseIdentityHashCode(false);
-		}
-
-		@Override
-		protected void appendDetail(StringBuffer buffer, String fieldName, byte[] array) {
-			buffer.append("NOT LOGGED");
-		}
-	}
-
-	private String toString(Object object) {
-		return ToStringBuilder.reflectionToString(object, COMMAND_TO_STRING_STYLE);
+	private String toLogString(Object object) {
+		return new ReflectionToStringBuilder(object, COMMAND_TO_STRING_STYLE) {
+			@Override
+			protected boolean accept(Field field) {
+				if (field.isAnnotationPresent(DontLogCommandExecution.class)) {
+					return false;
+				}
+				return super.accept(field);
+			}
+		}.toString();
 	}
 
 	@Override
@@ -161,5 +156,18 @@ class CommandServiceBean implements CommandService {
 			validationResult.addErrors(errors);
 		}
 		return validationResult;
+	}
+
+	private static class CommandToStringStyle extends ToStringStyle {
+		private CommandToStringStyle() {
+			super();
+			this.setUseShortClassName(true);
+			this.setUseIdentityHashCode(false);
+		}
+
+		@Override
+		protected void appendDetail(StringBuffer buffer, String fieldName, byte[] array) {
+			buffer.append("NOT LOGGED");
+		}
 	}
 }

@@ -1,22 +1,22 @@
 ext {
 
-	camel_version = '2.17.1'
-	spring_platform_version = '2.0.5.RELEASE'
+	camel_version = '2.18.0'
+	spring_platform_version = 'Athens-RELEASE'
 	xdocreport_version = '1.0.3'
 
 	ext.lib = [
 
 			//test
-			junit                 : "junit:junit",
-			mockito               : "org.mockito:mockito-core",
-			hamcrest_all          : "org.hamcrest:hamcrest-all",
-			spock_core            : "org.spockframework:spock-core",
-			spock_spring          : "org.spockframework:spock-spring",
-			groovy                : "org.codehaus.groovy:groovy-all",
+			junit              : "junit:junit",
+			mockito            : "org.mockito:mockito-core",
+			hamcrest_all       : "org.hamcrest:hamcrest-all",
+			spock_core         : "org.spockframework:spock-core",
+			spock_spring       : "org.spockframework:spock-spring",
+			groovy             : "org.codehaus.groovy:groovy-all",
 
 			//guava
-			guava                 : "com.google.guava:guava",
-			guava_test            : "com.google.guava:guava-testlib:17.0",
+			guava              : "com.google.guava:guava",
+			guava_test         : "com.google.guava:guava-testlib:17.0",
 
 			//slf4j
 			slf4j_api             : "org.slf4j:slf4j-api",
@@ -52,31 +52,31 @@ ext {
 			commons_net           : "commons-net:commons-net",
 			httpclient            : "org.apache.httpcomponents:httpclient",
 			jsr305                : "com.google.code.findbugs:jsr305",
-			javax_mail            : "com.sun.mail:javax.mail",
-			apache_poi            : "org.apache.poi:poi-ooxml",
-			jcraft_jsch           : "com.jcraft:jsch",
-			gson                  : "com.google.code.gson:gson",
-			cglib                 : "cglib:cglib-nodep:3.2.0",
+			javax_mail         : "com.sun.mail:javax.mail",
+			apache_poi         : "org.apache.poi:poi-ooxml",
+			jcraft_jsch        : "com.jcraft:jsch",
+			gson               : "com.google.code.gson:gson",
+			cglib              : "cglib:cglib-nodep:3.2.0",
 
 			//hibernate
-			hibernate_core        : "org.hibernate:hibernate-core",
-			hibernate_entity      : "org.hibernate:hibernate-entitymanager",
-			hibernate_envers      : "org.hibernate:hibernate-envers",
-			hibernate_ehcache     : "org.hibernate:hibernate-ehcache",
-			jadira_usertype       : "org.jadira.usertype:usertype.extended:4.0.0.GA",
-			ehcache               : "net.sf.ehcache:ehcache",
-			javax_validation      : "javax.validation:validation-api",
-			hibernate_validator   : "org.hibernate:hibernate-validator",
-			embed_el              : "org.apache.tomcat.embed:tomcat-embed-el",
+			hibernate_core     : "org.hibernate:hibernate-core",
+			hibernate_entity   : "org.hibernate:hibernate-entitymanager",
+			hibernate_envers   : "org.hibernate:hibernate-envers",
+			hibernate_ehcache  : "org.hibernate:hibernate-ehcache",
+			jadira_usertype    : "org.jadira.usertype:usertype.core:5.0.0.GA",
+			ehcache            : "net.sf.ehcache:ehcache",
+			javax_validation   : "javax.validation:validation-api",
+			hibernate_validator: "org.hibernate:hibernate-validator",
+			embed_el           : "org.apache.tomcat.embed:tomcat-embed-el",
 
-			h2                    : "com.h2database:h2",
-			hikaricp              : "com.zaxxer:HikariCP",
-			freemarker            : "org.freemarker:freemarker",
+			h2                 : "com.h2database:h2",
+			hikaricp           : "com.zaxxer:HikariCP",
+			freemarker         : "org.freemarker:freemarker",
 
-			quartz                : "org.quartz-scheduler:quartz",
+			quartz             : "org.quartz-scheduler:quartz",
 
 			//camel
-			camel_core            : "org.apache.camel:camel-core:${camel_version}",
+			camel_core         : "org.apache.camel:camel-core:${camel_version}",
 			camel_jms             : "org.apache.camel:camel-jms:${camel_version}",
 			camel_http            : "org.apache.camel:camel-http:${camel_version}",
 			camel_spring          : "org.apache.camel:camel-spring:${camel_version}",
