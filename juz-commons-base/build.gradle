@@ -11,7 +11,7 @@ dependencies {
 	compile lib.hibernate_core
 	compile lib.hibernate_entity
 	compile lib.hibernate_envers
-	compile lib.jadira_usertype
+	compile lib.hibernate_java8
 	compile lib.ehcache
 
 	compile(lib.hibernate_ehcache) {
