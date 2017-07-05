@@ -1,7 +1,7 @@
 package org.juz.common.persistence.model;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OptimisticLock;
@@ -52,7 +52,7 @@ public abstract class BaseEntity {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("id", getId()).toString();
+		return MoreObjects.toStringHelper(this).add("id", getId()).toString();
 	}
 
 	public void setUpdated(LocalDateTime updated) {

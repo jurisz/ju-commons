@@ -10,8 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.google.common.base.Throwables.propagate;
-
 public class PdfContentExtractor {
 
 	private static final Logger log = LoggerFactory.getLogger(PdfContentExtractor.class);
@@ -21,7 +19,7 @@ public class PdfContentExtractor {
 			FileInputStream pdfInputStream = new FileInputStream(pathToPdf);
 			return extractContentFrom(pdfInputStream);
 		} catch (IOException e) {
-			throw propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package org.juz.common.api;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 public class ValidationError {
@@ -52,7 +53,7 @@ public class ValidationError {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("property", property)
 				.add("errorCode", errorCode)
 				.add("wrongValue", wrongValue)

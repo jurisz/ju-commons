@@ -12,8 +12,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static com.google.common.base.Throwables.propagate;
-
 public class ExcelDocument {
 
 	private static final int autoFlushOnEveryNRecord = 300;
@@ -55,7 +53,7 @@ public class ExcelDocument {
 		CellStyle titleStyle = wb.createCellStyle();
 		//With gray need Foreground not Background!!!
 		titleStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-		titleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		for (int i = 0; i < headers.length; i++) {
 			Cell cell = row.createCell(i);
@@ -147,7 +145,7 @@ public class ExcelDocument {
 		try {
 			sh.flushRows();
 		} catch (IOException e) {
-			propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -158,7 +156,7 @@ public class ExcelDocument {
 			wb.write(out);
 			out.close();
 		} catch (IOException e) {
-			propagate(e);
+			throw new RuntimeException(e);
 		}
 		dispose();
 	}
